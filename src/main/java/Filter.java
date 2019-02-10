@@ -1,18 +1,15 @@
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+//TODO: FIX PATHING
 
 public class Filter {
-    private static final String FDPATH = "C:\\Users\\Helium\\IdeaProjects\\PWGEN\\src\\main\\resources\\FullDictionary.txt";
-    private static final String FPATH="C:\\Users\\Helium\\IdeaProjects\\PWGEN\\src\\main\\resources\\Dictionary.txt";
+    private static final String FDPATH="FullDictionary.txt";
+    private static final String FPATH="Dictionary.txt";
     public static void main(String[] args){
         try {
-            FileInputStream fin= new FileInputStream(FDPATH);
+            InputStream fin=Filter.class.getClassLoader().getResourceAsStream(FDPATH);
             Scanner sin=new Scanner(fin);
             PrintWriter out=new PrintWriter(new FileOutputStream(FPATH));
             String word=new String();
@@ -29,8 +26,7 @@ public class Filter {
         }
     }
     public static ArrayList<String> LenFilter(int length){
-        try {
-            FileInputStream fin=new FileInputStream(FPATH);
+            InputStream fin=Filter.class.getClassLoader().getResourceAsStream(FDPATH);
             ArrayList<String> filtered = new ArrayList<String>(65000);
             Scanner sin=new Scanner(fin);
             String word;
@@ -41,9 +37,5 @@ public class Filter {
                 }
             }
             return filtered;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return new ArrayList<String>(0);
     }
 }

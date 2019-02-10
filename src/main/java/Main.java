@@ -27,7 +27,6 @@ public class Main {
                     Generator gen=new Generator(wlen,digits);
                     String password=gen.generate();
                     window.show("Your password is:" + password);
-                    //TODO: generator;
                 case 1:
                     //TODO: viewer;
                 case 2:
@@ -40,3 +39,4 @@ public class Main {
     }
 }
 //TODO: functional classes, full implementation of both views
+//TODO: Save password, load password list
