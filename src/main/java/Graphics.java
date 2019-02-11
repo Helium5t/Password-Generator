@@ -26,4 +26,8 @@ public class Graphics extends Application implements GeneralView{
     public String ask(String message) {
         return null;
     }
+
+    public String getPath() {
+        return null;
+    }
 }

@@ -1,3 +1,6 @@
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -25,7 +28,8 @@ public class Main {
                     Integer wlen = Integer.decode(window.ask("Choose word length"));
                     Integer digits = Integer.decode(window.ask("Choose number of digits"));
                     Generator gen=new Generator(wlen,digits);
-                    String password=gen.generate();
+                    Password pw=gen.generate();
+                    String password=pw.getPw();
                     window.show("Your password is:" + password);
                     opts.clear();
                     opts.add("Save");
@@ -41,8 +45,21 @@ public class Main {
                             chosen = window.choose(choices);
                             switch (chosen){
                                 case 0:
-                                    String path=""
+                                    String path="Vault.pw";
+                                    StoreManager sm=new StoreManager(path);
+                                    sm.add(pw);
+                                case 1:
+                                    path=window.getPath();
+                                    sm=new StoreManager(path);
+                                    sm.add(pw);
                             }
+                        case 1:
+                            ClipboardContent content=new ClipboardContent();
+                            content.putString(pw.getPw());
+                            Clipboard.getSystemClipboard().setContent(content);
+                            window.show("Password saved to clipoard");
+                            end=true;
+                            break;
                     }
 
                 case 1:
@@ -56,6 +73,6 @@ public class Main {
 
     }
 }
-//TODO: ask to save, ask for path, password storing method
+//TODO: fix save/close
 //TODO: functional classes, full implementation of both views
 //TODO: Save password, load password list

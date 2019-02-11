@@ -26,4 +26,11 @@ public class CommandLine implements GeneralView {
         String returned=in.nextLine();
         return returned;
     }
+
+    public String getPath() {
+        System.out.println("Please input vault path:");
+        Scanner in=new Scanner(System.in);
+        String path=in.nextLine();
+        return path;
+    }
 }

@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.HashMap;
 
 public class StoreManager implements Serializable {
-    private HashMap<String,String> storage;
+    private HashMap<String,String> storage; // < site , password >
     private String storagepath;
     public StoreManager(String path){
         storagepath=path;
@@ -26,5 +26,9 @@ public class StoreManager implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void add(Password pw){
+        storage.put(pw.getNote(),pw.getPw());
     }
 }
