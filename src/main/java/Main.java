@@ -27,6 +27,24 @@ public class Main {
                     Generator gen=new Generator(wlen,digits);
                     String password=gen.generate();
                     window.show("Your password is:" + password);
+                    opts.clear();
+                    opts.add("Save");
+                    opts.add("Close");
+                    choices=new OptionList(opts);
+                    chosen = window.choose(choices);
+                    switch(chosen){
+                        case 0:
+                            opts.clear();
+                            opts.add("Use default path");
+                            opts.add("Use custom path");
+                            choices=new OptionList(opts);
+                            chosen = window.choose(choices);
+                            switch (chosen){
+                                case 0:
+                                    String path=""
+                            }
+                    }
+
                 case 1:
                     //TODO: viewer;
                 case 2:
@@ -38,5 +56,6 @@ public class Main {
 
     }
 }
+//TODO: ask to save, ask for path, password storing method
 //TODO: functional classes, full implementation of both views
 //TODO: Save password, load password list
