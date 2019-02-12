@@ -1,11 +1,13 @@
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
+    public static final String DefPath="Vault.pw";
     public static void main(String[] args){
         GeneralView window;
         switch (args[0].charAt(0)){
@@ -45,27 +47,33 @@ public class Main {
                             chosen = window.choose(choices);
                             switch (chosen){
                                 case 0:
-                                    String path="Vault.pw";
+                                    String path=DefPath;
                                     StoreManager sm=new StoreManager(path);
                                     sm.add(pw);
+                                    break;
                                 case 1:
                                     path=window.getPath();
                                     sm=new StoreManager(path);
                                     sm.add(pw);
+                                    break;
                             }
+                            break;
                         case 1:
-                            ClipboardContent content=new ClipboardContent();
-                            content.putString(pw.getPw());
-                            Clipboard.getSystemClipboard().setContent(content);
+                            Toolkit tk=Toolkit.getDefaultToolkit();
+                            Clipboard cb=tk.getSystemClipboard();
+                            StringSelection ss=new StringSelection(password);
+                            cb.setContents(ss,ss);
                             window.show("Password saved to clipoard");
                             end=true;
                             break;
                     }
-
+                    break;
                 case 1:
                     //TODO: viewer;
+                    break;
                 case 2:
                     end = true;
+                    break;
                 default:
                     //TODO: viewer;
             }
@@ -73,6 +81,6 @@ public class Main {
 
     }
 }
-//TODO: fix save/close
+//TODO: get rid of serr prints
 //TODO: functional classes, full implementation of both views
 //TODO: Save password, load password list

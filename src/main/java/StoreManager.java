@@ -11,9 +11,23 @@ public class StoreManager implements Serializable {
             ObjectInput oin=new ObjectInputStream(in);
             storage=(HashMap<String,String>) oin.readObject();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("No previous versions of Vault, initializing...");
+            HashMap<String,String> hash=new HashMap<String, String>();
+            try {
+                OutputStream out=new FileOutputStream(StoreManager.class.getClassLoader().getResource(storagepath).getPath());
+                ObjectOutput fout= new ObjectOutputStream(out);
+                fout.writeObject(hash);
+                storage=hash;
+                fout.close();
+                out.close();
+            } catch (FileNotFoundException e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            System.out.println("CLASSNOTFOUND");
         }
     }
     public void save(){
