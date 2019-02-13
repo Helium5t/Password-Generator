@@ -47,12 +47,11 @@ public class Main {
                             chosen = window.choose(choices);
                             switch (chosen){
                                 case 0:
-                                    String path=DefPath;
-                                    StoreManager sm=new StoreManager(path);
+                                    StoreManager sm=new StoreManager(DefPath);
                                     sm.add(pw);
                                     break;
                                 case 1:
-                                    path=window.getPath();
+                                    String path=window.getPath();
                                     sm=new StoreManager(path);
                                     sm.add(pw);
                                     break;

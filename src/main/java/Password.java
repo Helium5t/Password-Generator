@@ -7,7 +7,6 @@ public class Password {
     }
 
     public void encrypt(String key){
-        System.err.println("I GOT " + key);
         pw=key;
     }
 

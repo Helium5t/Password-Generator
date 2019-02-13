@@ -27,7 +27,6 @@ public class Generator {
             for(int times=0; times<digits;times++){
                 generated=generated + rng.nextInt(10);
             }
-            System.err.println("STRING IS " + generated + " and key has " + key.getNote());
             key.encrypt(generated);
             Password returned=new Password(key.getNote());
             returned.encrypt(key.getPw());

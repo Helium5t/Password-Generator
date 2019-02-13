@@ -12,7 +12,7 @@ public class CommandLine implements GeneralView {
 
     public int choose(OptionList choices) {
         System.out.println("What do you want to do?");
-        System.out.println(choices.getContents().get(0) + " - " + choices.getContents().get(1));
+        System.out.println("["+choices.getContents().get(0) + "] - [" + choices.getContents().get(1)+"]");
         System.out.println("Write 0 or 1 and press Enter");
         Scanner in= new Scanner(System.in);
         char choice= in.nextLine().charAt(0);
