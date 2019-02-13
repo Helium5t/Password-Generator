@@ -29,8 +29,17 @@ public class Main {
                 case 0:
                     Integer wlen = Integer.decode(window.ask("Choose word length"));
                     Integer digits = Integer.decode(window.ask("Choose number of digits"));
-                    Generator gen=new Generator(wlen,digits);
-                    Password pw=gen.generate();
+                    String site = window.ask("Input site related to password");
+                    Generator gen;
+                    Password pw;
+                    if (site.equals("")){
+                        gen = new Generator(wlen,digits);
+                        pw=gen.generate();
+                    }
+                    else {
+                        gen= new Generator(wlen,digits,site);
+                        pw=gen.generate();
+                    }
                     String password=pw.getPw();
                     window.show("Your password is:" + password);
                     opts.clear();
@@ -68,7 +77,24 @@ public class Main {
                     }
                     break;
                 case 1:
-                    //TODO: viewer;
+                    opts.clear();
+                    opts.add("Use default path");
+                    opts.add("Use custom path");
+                    choices=new OptionList(opts);
+                    chosen= window.choose(choices);
+                    switch (chosen){
+                        case 0:
+                            Viewer lister=new Viewer(DefPath,window);
+                            site=window.ask("Enter site needed");
+                            window.show(lister.get(site));
+                            break;
+                        case 1:
+                            String path=window.ask("Input custom path");
+                            lister=new Viewer(path,window);
+                            site=window.ask("Enter site needed");
+                            window.show(lister.get(site));
+                            break;
+                    }
                     break;
                 case 2:
                     end = true;
@@ -80,6 +106,5 @@ public class Main {
 
     }
 }
-//TODO: get rid of serr prints
-//TODO: functional classes, full implementation of both views
-//TODO: Save password, load password list
+//TODO: fix lister flow, fix interaction storemanager/lister (maybe use only one class)
+//TODO: full implementation of both views

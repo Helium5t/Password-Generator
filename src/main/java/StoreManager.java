@@ -52,6 +52,9 @@ public class StoreManager implements Serializable {
     }
 
     public void add(Password pw){
-        storage.put(pw.getNote(),pw.getPw());
+
+        if(pw.getNote().equals("")){
+            storage.put("No Site",pw.getPw());
+        }
     }
 }
