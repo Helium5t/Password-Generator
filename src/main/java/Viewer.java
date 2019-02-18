@@ -3,24 +3,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Viewer {
-    private GeneralView window;
     private HashMap<String,String> storage;
     private String storagepath;
-    public Viewer(String path,GeneralView screen){
+    public Viewer(String path,StoreManager file){
         storagepath=path;
-        window=screen;
-        try{
-            InputStream in=Viewer.class.getClassLoader().getResourceAsStream(path);
-            ObjectInput oin=new ObjectInputStream(in);
-            storage= ((HashMap<String,String>) oin.readObject());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (NullPointerException e){
-            window.show("No previously stored passwords at the specified path");
-            storage=new HashMap<String, String>();
-        }
+        storage=file.getStorage();
+    }
+    public int size(){
+        return storage.size();
     }
     public String get(String site){
         String returned=storage.get(site);

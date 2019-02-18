@@ -19,10 +19,12 @@ public class Main {
                     window=new CommandLine();
         }
         boolean end = false;
+        StoreManager sm=null;
         while(!end) {
             ArrayList<String> opts = new ArrayList<String>(2);
             opts.add("Generate new password");
             opts.add("See password list");
+            opts.add("End");
             OptionList choices = new OptionList(opts);
             int chosen = window.choose(choices);
             switch (chosen) {
@@ -56,7 +58,7 @@ public class Main {
                             chosen = window.choose(choices);
                             switch (chosen){
                                 case 0:
-                                    StoreManager sm=new StoreManager(DefPath);
+                                    sm=new StoreManager(DefPath);
                                     sm.add(pw);
                                     break;
                                 case 1:
@@ -65,6 +67,7 @@ public class Main {
                                     sm.add(pw);
                                     break;
                             }
+                            sm.save();
                             break;
                         case 1:
                             Toolkit tk=Toolkit.getDefaultToolkit();
@@ -82,17 +85,45 @@ public class Main {
                     opts.add("Use custom path");
                     choices=new OptionList(opts);
                     chosen= window.choose(choices);
-                    switch (chosen){
+                    Viewer lister;
+                    switch (chosen) {
                         case 0:
-                            Viewer lister=new Viewer(DefPath,window);
-                            site=window.ask("Enter site needed");
-                            window.show(lister.get(site));
-                            break;
+                            if (sm == null) {
+                                sm = new StoreManager(DefPath);
+                            }
+                            lister = new Viewer(DefPath, sm);
+                            if (lister.size() > 0) {
+                                window.show("At the moment you have stored " + lister.size() + " passwords in yor vault");
+                                site = window.ask("Enter site needed");
+                                window.show(lister.get(site));
+                                break;
+                            } else {
+                                window.show("There are no stored password at the moment.");
+                                break;
+                            }
                         case 1:
-                            String path=window.ask("Input custom path");
-                            lister=new Viewer(path,window);
-                            site=window.ask("Enter site needed");
-                            window.show(lister.get(site));
+                            String path = window.ask("Input custom path");
+                            if(sm!=null){
+                                if(sm.getStoragepath().equals(path)){
+                                    lister = new Viewer(path,sm);
+                                }
+                                else {
+                                    sm = new StoreManager(path);
+                                    lister = new Viewer(path,sm);
+                                }
+                            }
+                            else{
+                                sm = new StoreManager(path);
+                                lister = new Viewer(path,sm);
+                            }
+                            if (lister.size() > 0) {
+                                window.show("At the moment you have stored " + lister.size() + " passwords in yor vault");
+                                site = window.ask("Enter site needed");
+                                window.show(lister.get(site));
+                            } else {
+                                window.show("There are no stored password at the moment.");
+                                break;
+                            }
                             break;
                     }
                     break;

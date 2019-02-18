@@ -2,10 +2,9 @@ import java.io.*;
 import java.util.HashMap;
 
 public class StoreManager implements Serializable {
-    private HashMap<String,String> storage; // < site , password >
+    protected HashMap<String,String> storage; // < site , password >
     private String storagepath;
     public StoreManager(String path){
-        storagepath=path;
         try {
             InputStream in= StoreManager.class.getClassLoader().getResourceAsStream(path);
             ObjectInput oin=new ObjectInputStream(in);
@@ -41,20 +40,33 @@ public class StoreManager implements Serializable {
     }
     public void save(){
         try{
-            OutputStream out= new FileOutputStream(StoreManager.class.getClassLoader().getResource(storagepath).getPath());
+            OutputStream out= new FileOutputStream(storagepath);
             ObjectOutput fout= new ObjectOutputStream(out);
             fout.writeObject(storage);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (NullPointerException e){
+
         }
+    }
+
+    public HashMap<String, String> getStorage() {
+        return storage;
+    }
+
+    public String getStoragepath() {
+        return storagepath;
     }
 
     public void add(Password pw){
 
         if(pw.getNote().equals("")){
             storage.put("No Site",pw.getPw());
+        }
+        else {
+            storage.put(pw.getNote(),pw.getPw());
         }
     }
 }
