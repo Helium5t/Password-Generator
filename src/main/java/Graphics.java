@@ -7,27 +7,28 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 
-public class Graphics extends Application implements GeneralView{
-
-
-    public void start(Stage primaryStage) throws Exception {
-
-    }
-    public static void main(String[] args ){
-        launch(args);
+public class Graphics implements GeneralView,Runnable{
+    public Graphics(){
+        GUI.build();
     }
     public void show(String message) {
+        GUI.show(message);
     }
 
     public int choose(OptionList choices) {
-        return 0;
+
+        return GUI.choose(choices);
     }
 
     public String ask(String message) {
-        return null;
+        return GUI.ask(message);
     }
 
     public String getPath() {
-        return null;
+        return GUI.getPath();
+    }
+
+    public void run() {
+
     }
 }
