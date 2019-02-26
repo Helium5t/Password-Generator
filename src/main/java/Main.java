@@ -10,12 +10,14 @@ public class Main {
     public static final String DefPath="Vault.pw";
     public static void main(String[] args){
         GeneralView window;
+        AppState state=new Launch();
         switch (args[0].charAt(0)) {
             case 'c':
                 window = new CommandLine();
                 break;
             case 'g':
-                window=new Graphics();
+                window=new Graphics(state);
+                System.out.println("OUT OF GRAPHICS");
                 break;
             default:
                 window = new CommandLine();
@@ -23,9 +25,11 @@ public class Main {
         }
         boolean end = false;
         StoreManager sm=null;
-        AppState state=new MainMenu(window);
+        state=new MainMenu(window);
         while(!state.currentState().equals("End")) {
+            System.out.println("CURRENT STATE:"+ state.currentState());
             state=state.nextState();
+            System.out.println("NEXT STATE");
         }
 
     }

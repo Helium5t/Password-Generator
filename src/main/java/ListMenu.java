@@ -65,4 +65,8 @@ public class ListMenu extends AppState {
     public String currentState() {
         return "List";
     }
+
+    public int getid() {
+        return 3;
+    }
 }

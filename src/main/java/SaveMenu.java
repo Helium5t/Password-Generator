@@ -35,4 +35,8 @@ public class SaveMenu extends AppState {
         return "Save";
     }
 
+    public int getid() {
+        return 4;
+    }
+
 }

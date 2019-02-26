@@ -26,7 +26,9 @@ public class MainMenu extends AppState {
     }
 
     public AppState nextState() {
+        System.out.println("CHOOSING");
         int chosen=window.choose(choices);
+        System.out.println("CHOSEN");
         switch (chosen){
             case 0:
                 return new GenerationMenu(window);
@@ -42,5 +44,9 @@ public class MainMenu extends AppState {
 
     public String currentState() {
         return "Main Menu";
+    }
+
+    public int getid() {
+        return 1;
     }
 }

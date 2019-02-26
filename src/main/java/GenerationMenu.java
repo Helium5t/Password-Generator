@@ -54,4 +54,8 @@ public class GenerationMenu extends AppState {
     public String currentState() {
         return "Generator";
     }
+
+    public int getid() {
+        return 2;
+    }
 }

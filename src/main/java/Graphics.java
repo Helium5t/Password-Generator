@@ -7,16 +7,25 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 
-public class Graphics implements GeneralView,Runnable{
-    public Graphics(){
-        GUI.build();
+public class Graphics implements GeneralView{
+    private StateObserver mainobs;
+    private boolean wait;
+    public Graphics(AppState state){
+        StateObserver so=new StateObserver(state);
+        Thread Observer=new Thread(so);
+        Observer.start();
+        GUI.newGUI(so);
+        Thread screen=new Thread(new GUILauncher());
+        screen.start();
+        System.out.println("OUT OF LAUNCHER");
+        mainobs=so;
     }
+
     public void show(String message) {
         GUI.show(message);
     }
 
     public int choose(OptionList choices) {
-
         return GUI.choose(choices);
     }
 
@@ -26,9 +35,5 @@ public class Graphics implements GeneralView,Runnable{
 
     public String getPath() {
         return GUI.getPath();
-    }
-
-    public void run() {
-
     }
 }

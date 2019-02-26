@@ -11,4 +11,8 @@ public class End extends AppState {
     public String currentState() {
         return state;
     }
+
+    public int getid() {
+        return 0;
+    }
 }

@@ -21,7 +21,20 @@ public class GUI extends Application{
     private static Group root;
     private static ObservableList nodes;
     private static int choiceid;
-    public void start(Stage primaryStage) throws Exception {
+    private static String response;
+    private static StateObserver mainobs;
+    private static Scene scene;
+    private static Stage primStage;
+
+    public static void newGUI(StateObserver so){
+        mainobs=so;
+    }
+
+    public static void main(String[] args){
+        launch();
+    }
+
+    public synchronized void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("TESTING WINDOW");
         root= new Group();
         nodes=root.getChildren();
@@ -32,8 +45,12 @@ public class GUI extends Application{
         primaryStage.setTitle("Password Generator");
         nodes.add(hello);
         Scene shown=new Scene(root,500,500);
+        scene=shown;
+        primStage=primaryStage;
         primaryStage.setScene(shown);
         primaryStage.show();
+        System.out.println("ENTERING WINDOW");
+
     /*
         ChoiceBox cb = new ChoiceBox();
         ObservableList choices= cb.getItems();
@@ -51,21 +68,22 @@ public class GUI extends Application{
         b.setTranslateY(250);
         nodes.add(b);
         */
-
     }
+
 
     public static void show(String message) {
     }
 
-    public static int choose(OptionList choices) {
+    public synchronized static int choose(OptionList choices){
+        choiceid=-1;
         final ChoiceBox cb=new ChoiceBox();
         ObservableList opts=cb.getItems();
         for(int i=0;i<choices.size();i++){
             opts.add(choices.getContents().get(i));
         }
         Button okb=new Button("Choose");
-        root=new Group();
-        nodes=root.getChildren();
+        Group view=new Group();
+        nodes=view.getChildren();
         nodes.add(cb);
         nodes.add(okb);
         EventHandler<MouseEvent> chosen=new EventHandler (){
@@ -74,6 +92,9 @@ public class GUI extends Application{
             }
         };
         okb.addEventHandler(MouseEvent.MOUSE_CLICKED,chosen);
+        primStage.setScene(new Scene(view,500,500));
+        scene.setRoot(view);
+        primStage.show();
         return choiceid;
     }
 
@@ -84,6 +105,15 @@ public class GUI extends Application{
     public static String getPath() {
         return null;
     }
+
+    public static int getChoice() {
+        return choiceid;
+    }
+
+    public static String getResponse() {
+        return response;
+    }
+
     public static void setchoice(int id){
         choiceid=id;
     }
