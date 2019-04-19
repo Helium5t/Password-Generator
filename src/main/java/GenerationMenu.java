@@ -3,6 +3,8 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.util.ArrayList;
 
+
+
 public class GenerationMenu extends AppState {
     private OptionList choices;
     private GeneralView window;
@@ -16,7 +18,9 @@ public class GenerationMenu extends AppState {
     }
     public AppState nextState() {
         Integer wlen = Integer.decode(window.ask("Choose word length"));
+        System.out.println(wlen);
         Integer digits = Integer.decode(window.ask("Choose number of digits"));
+        System.out.println(digits);
         String site = window.ask("Input site related to password");
         Generator gen;
         Password pw;

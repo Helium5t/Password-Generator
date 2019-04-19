@@ -1,3 +1,5 @@
+
+@Deprecated
 public class StateObserver implements Runnable{
     private AppState state;
     private String StateName;
@@ -19,14 +21,22 @@ public class StateObserver implements Runnable{
                     e.printStackTrace();
                 }
             }
+            this.notify();
         }
     }
 
     public String getStateName() {
+        check();
         return StateName;
+    }
+    public int getStateid(){return state.getid();}
+
+    public void check(){
+        if(!StateName.equals(state.currentState())){
+            StateName=state.currentState();
+        }
     }
 
     public void update(){
-        StateName=state.currentState();
     }
 }

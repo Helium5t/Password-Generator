@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+
 public class ListMenu extends AppState {
     private GeneralView window;
     private OptionList choices;
@@ -24,6 +25,14 @@ public class ListMenu extends AppState {
                 Viewer lister = new Viewer(Main.DefPath, sm);
                 if (lister.size() > 0) {
                     window.show("At the moment you have stored " + lister.size() + " passwords in your vault");
+                    synchronized (this){
+                        try {
+                            this.wait(150);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    System.out.println("asking now for site");
                     String site = window.ask("Enter site needed");
                     window.show("Your password is:"+lister.get(site));
                     return new MainMenu(window);

@@ -8,15 +8,17 @@ import java.util.Scanner;
 
 public class Main {
     public static final String DefPath="Vault.pw";
+    private static AppState state;
     public static void main(String[] args){
         GeneralView window;
-        AppState state=new Launch();
+        state=new Launch();
+        AppObserver observer=new AppObserver();
         switch (args[0].charAt(0)) {
             case 'c':
                 window = new CommandLine();
                 break;
             case 'g':
-                window=new Graphics(state);
+                window=new GraphicsInterface(observer);
                 System.out.println("OUT OF GRAPHICS");
                 break;
             default:
@@ -32,6 +34,10 @@ public class Main {
             System.out.println("NEXT STATE");
         }
 
+    }
+
+    public static AppState getState() {
+        return state;
     }
 }
 

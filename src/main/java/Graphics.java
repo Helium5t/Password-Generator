@@ -7,6 +7,8 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 
+@Deprecated
+
 public class Graphics implements GeneralView{
     private StateObserver mainobs;
     private boolean wait;
