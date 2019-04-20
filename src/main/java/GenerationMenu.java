@@ -18,9 +18,7 @@ public class GenerationMenu extends AppState {
     }
     public AppState nextState() {
         Integer wlen = Integer.decode(window.ask("Choose word length"));
-        System.out.println(wlen);
         Integer digits = Integer.decode(window.ask("Choose number of digits"));
-        System.out.println(digits);
         String site = window.ask("Input site related to password");
         Generator gen;
         Password pw;

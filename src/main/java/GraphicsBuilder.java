@@ -1,16 +1,14 @@
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-
-import javafx.scene.control.Button;
 import javafx.scene.text.TextAlignment;
 
 /**
@@ -352,7 +350,6 @@ public class GraphicsBuilder {
                             e.printStackTrace();
                         }
                     }
-                    System.out.println("asking now for message");
                     msgshown=reply.getResponse();
                     reply.spendToken();
                 }

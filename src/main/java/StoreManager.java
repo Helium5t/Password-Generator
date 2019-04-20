@@ -13,10 +13,8 @@ public class StoreManager implements Serializable {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            System.out.println("CLASSNOTFOUND");
         }
         catch (NullPointerException e2){
-            System.out.println("No previous versions of Vault, initializing...");
             HashMap<String,String> hash=new HashMap<String, String>();
             try {
                 File origin=new File(StoreManager.class.getClassLoader().getResource("Dictionary.txt").getPath());

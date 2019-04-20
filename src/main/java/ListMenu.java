@@ -32,7 +32,6 @@ public class ListMenu extends AppState {
                             e.printStackTrace();
                         }
                     }
-                    System.out.println("asking now for site");
                     String site = window.ask("Enter site needed");
                     window.show("Your password is:"+lister.get(site));
                     return new MainMenu(window);

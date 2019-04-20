@@ -1,11 +1,4 @@
 
-import java.awt.*;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Main {
     public static final String DefPath="Vault.pw";
     private static AppState state;
@@ -19,7 +12,6 @@ public class Main {
                 break;
             case 'g':
                 window=new GraphicsInterface(observer);
-                System.out.println("OUT OF GRAPHICS");
                 break;
             default:
                 window = new CommandLine();
@@ -29,9 +21,7 @@ public class Main {
         StoreManager sm=null;
         state=new MainMenu(window);
         while(!state.currentState().equals("End")) {
-            System.out.println("CURRENT STATE:"+ state.currentState());
             state=state.nextState();
-            System.out.println("NEXT STATE");
         }
 
     }
